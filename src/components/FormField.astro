@@ -1,0 +1,78 @@
+---
+interface Props {
+	label: string;
+	name: string;
+	type?: string;
+	required?: boolean;
+	placeholder?: string;
+}
+
+const { 
+	label, 
+	name, 
+	type = "text", 
+	required = false,
+	placeholder = "" 
+} = Astro.props;
+---
+
+<div class="form-field">
+	<label for={name} class="form-label">
+		{label}
+		{required && <span class="required">*</span>}
+	</label>
+	<input
+		type={type}
+		id={name}
+		name={name}
+		required={required}
+		placeholder={placeholder}
+		class="form-input"
+	/>
+</div>
+
+<style>
+	.form-field {
+		margin-bottom: var(--spacing-md);
+	}
+
+	.form-label {
+		display: block;
+		font-weight: 600;
+		color: var(--color-text);
+		margin-bottom: var(--spacing-xs);
+		font-size: 0.9375rem;
+	}
+
+	.required {
+		color: var(--color-primary);
+		margin-left: 2px;
+	}
+
+	.form-input {
+		width: 100%;
+		padding: var(--spacing-sm);
+		border: 2px solid var(--color-border);
+		border-radius: 4px;
+		font-size: 1rem;
+		font-family: inherit;
+		color: var(--color-text);
+		background-color: var(--color-background);
+		transition: border-color 0.2s ease, box-shadow 0.2s ease;
+	}
+
+	.form-input:hover {
+		border-color: var(--color-primary-light);
+	}
+
+	.form-input:focus {
+		outline: none;
+		border-color: var(--color-primary);
+		box-shadow: 0 0 0 3px rgba(26, 95, 63, 0.1);
+	}
+
+	.form-input::placeholder {
+		color: var(--color-text-light);
+	}
+</style>
+

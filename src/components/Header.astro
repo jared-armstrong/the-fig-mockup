@@ -1,0 +1,176 @@
+---
+interface Props {
+	currentPage?: string;
+}
+
+const { currentPage = "" } = Astro.props;
+
+const navItems = [
+	{ href: "/", label: "Home" },
+	{ href: "/pictures", label: "Pictures" },
+	{ href: "/signup", label: "Sign Up" },
+];
+---
+
+<header class="header">
+	<div class="header-container">
+		<div class="header-content">
+			<a href="/" class="logo-link">
+				<div class="logo">
+					<svg class="logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+						<!-- Golfer silhouette in mid-swing -->
+						<path d="M20 80 L20 60 Q20 50 25 45 Q30 40 35 45 L40 50 Q45 55 50 50 L55 45 Q60 40 65 45 Q70 50 70 60 L70 80 Z" 
+							fill="var(--color-primary)" />
+						<!-- Golf club shaft -->
+						<line x1="65" y1="50" x2="80" y2="25" stroke="var(--color-primary)" stroke-width="2.5" stroke-linecap="round" />
+						<!-- Golf club head -->
+						<ellipse cx="82" cy="23" rx="4" ry="2" fill="var(--color-primary)" />
+						<!-- Golf ball -->
+						<circle cx="85" cy="20" r="2.5" fill="var(--color-primary)" />
+					</svg>
+					<div class="logo-text">
+						<h1 class="logo-title">THE FIG</h1>
+					</div>
+				</div>
+			</a>
+			
+			<nav class="nav">
+				<ul class="nav-list">
+					{navItems.map((item) => (
+						<li class="nav-item">
+							<a 
+								href={item.href} 
+								class:list={["nav-link", { "nav-link--active": currentPage === item.href }]}
+							>
+								{item.label}
+							</a>
+						</li>
+					))}
+				</ul>
+			</nav>
+		</div>
+	</div>
+</header>
+
+<style>
+	.header {
+		width: 100%;
+		background-color: var(--color-background);
+		border-bottom: 1px solid var(--color-border);
+		position: sticky;
+		top: 0;
+		z-index: 100;
+		backdrop-filter: blur(10px);
+		background-color: rgba(255, 255, 255, 0.95);
+	}
+
+	.header-container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 var(--spacing-md);
+	}
+
+	.header-content {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: var(--spacing-md) 0;
+	}
+
+	.logo-link {
+		display: flex;
+		align-items: center;
+		text-decoration: none;
+		color: inherit;
+	}
+
+	.logo {
+		display: flex;
+		align-items: center;
+		gap: var(--spacing-sm);
+	}
+
+	.logo-icon {
+		width: 50px;
+		height: 50px;
+	}
+
+	.logo-text {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.logo-title {
+		font-size: 1.75rem;
+		font-weight: 700;
+		color: var(--color-primary);
+		margin: 0;
+		line-height: 1.2;
+	}
+
+	.nav {
+		display: flex;
+	}
+
+	.nav-list {
+		display: flex;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		gap: var(--spacing-lg);
+		align-items: center;
+	}
+
+	.nav-item {
+		margin: 0;
+	}
+
+	.nav-link {
+		font-size: 1rem;
+		font-weight: 500;
+		color: var(--color-text);
+		padding: var(--spacing-xs) var(--spacing-sm);
+		position: relative;
+		transition: color 0.2s ease;
+	}
+
+	.nav-link:hover {
+		color: var(--color-primary);
+	}
+
+	.nav-link--active {
+		color: var(--color-primary);
+	}
+
+	.nav-link--active::after {
+		content: '';
+		position: absolute;
+		bottom: -2px;
+		left: var(--spacing-sm);
+		right: var(--spacing-sm);
+		height: 2px;
+		background-color: var(--color-primary);
+	}
+
+	@media (max-width: 768px) {
+		.header-content {
+			flex-direction: column;
+			gap: var(--spacing-md);
+			padding: var(--spacing-sm) 0;
+		}
+
+		.nav-list {
+			gap: var(--spacing-md);
+		}
+
+		.logo-title {
+			font-size: 1.5rem;
+		}
+
+		.logo-icon {
+			width: 40px;
+			height: 40px;
+		}
+	}
+</style>
+

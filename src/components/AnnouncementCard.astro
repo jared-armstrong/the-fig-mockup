@@ -1,0 +1,44 @@
+---
+interface Props {
+	date: string;
+	title: string;
+}
+
+const { date, title } = Astro.props;
+---
+
+<article class="announcement-card">
+	<time class="announcement-date" datetime={date}>{date}</time>
+	<h3 class="announcement-title">{title}</h3>
+</article>
+
+<style>
+	.announcement-card {
+		padding: var(--spacing-md);
+		border-left: 3px solid var(--color-primary);
+		background-color: var(--color-background);
+		margin-bottom: var(--spacing-md);
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
+	}
+
+	.announcement-card:hover {
+		transform: translateX(4px);
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	}
+
+	.announcement-date {
+		display: block;
+		font-size: 0.875rem;
+		color: var(--color-text-light);
+		margin-bottom: var(--spacing-xs);
+		font-weight: 500;
+	}
+
+	.announcement-title {
+		font-size: 1.125rem;
+		color: var(--color-text);
+		margin: 0;
+		font-weight: 600;
+	}
+</style>
+
