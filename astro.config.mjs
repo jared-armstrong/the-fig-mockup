@@ -7,6 +7,6 @@ export default defineConfig({
 	// Change this to '/' if deploying to username.github.io (main repo)
 	// or keep as '/the-fig-mockup' for project pages
 	base: '/the-fig-mockup',
-	site: 'https://jared-armstrong.github.io',
+	site: 'https://jared-armstrong.github.io/the-fig-mockup',
 	output: 'static',
 });
